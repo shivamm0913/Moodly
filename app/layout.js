@@ -2,8 +2,8 @@ import { Chicle, Geist_Mono, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import { AuthProvider } from "@/context/AuthContext";
-import Head from "./head";
 import Logout from "@/components/Logout";
+import Head from "./head";
 
 const openSans = Open_Sans({
   variable: "--font-geist-sans",
@@ -48,7 +48,10 @@ export default function RootLayout({ children }) {
       <Head />
       <AuthProvider>
         <body
-          className={`${openSans.variable}  antialiased w-full max-w-[1300px] mx-auto text-sm sm:text-base min-h-screen flex flex-col text-slate-800`}
+          className={
+            "w-full max-w-[1000px] mx-auto text-sm sm:text-base min-h-screen flex flex-col text-slate-800  " +
+            fugaz.className
+          }
         >
           {header}
           {children}
