@@ -4,7 +4,10 @@ Moodly is a modern **mood tracking web app** that helps users log their daily mo
 It features a beautiful **dashboard with analytics**, a **calendar view**, and secure **Firebase authentication & Firestore storage**.
 
 ---
+## 🔗 Live Demo
+🚀 **Click here to view the live app https://moodlyyy.netlify.app/**  
 
+---
 ## ✨ Features
 - **Daily Mood Tracking** – Log and track your mood every day.
 - **Streaks Dashboard** – Displays current streaks, time remaining to log mood, and average mood trends.
