@@ -27,22 +27,6 @@ It features a beautiful **dashboard with analytics**, a **calendar view**, and s
 
 ---
 
-## 📂 Project Structure
-Moodly/
-│
-├── app/ # App directory
-│ ├── layout.js # App-wide layout
-│ ├── page.js # Homepage
-│ ├── dashboard/ # Dashboard with streaks and analytics
-│ ├── components/ # Reusable components (Calendar, Mood Card, Navbar)
-│ └── utils/ # Helper functions
-│
-├── public/ # Static assets
-├── package.json # Dependencies
-└── README.md # Documentation
-
-
-
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
