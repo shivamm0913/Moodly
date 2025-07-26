@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { gradients, baseRating } from "@/utils";
 import { Chicle } from "next/font/google";
+import { FaChevronCircleLeft } from "react-icons/fa";
+import { FaChevronCircleRight } from "react-icons/fa";
 
 const months = {
   January: "Jan",
@@ -93,7 +95,7 @@ export default function Calendar(props) {
           }}
           className="mr-auto text-indigo-400 text-lg duration-200 hover:opacity-60 sm:text-xl"
         >
-          <i className="fa-solid fa-circle-chevron-left"></i>
+          <FaChevronCircleLeft />
         </button>
         <p
           className={`text-center capitalize text-xl sm:text-4xl  textGradient whitespace-nowrap  ${fugaz.className}`}
@@ -106,7 +108,7 @@ export default function Calendar(props) {
           }}
           className="ml-auto text-indigo-400 text-lg duration-200 hover:opacity-60  sm:text-xl"
         >
-          <i className="fa-solid fa-circle-chevron-right"></i>
+          <FaChevronCircleRight />
         </button>
       </div>
       <div className="flex flex-col overflow-hidden gap-1 py-4 sm:py-6  md:py-10">

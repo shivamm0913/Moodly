@@ -3,7 +3,6 @@ import "./globals.css";
 import Link from "next/link";
 import { AuthProvider } from "@/context/AuthContext";
 import Logout from "@/components/Logout";
-import Head from "./head.js";
 
 const openSans = Open_Sans({
   variable: "--font-geist-sans",
@@ -45,13 +44,9 @@ export default function RootLayout({ children }) {
   );
   return (
     <html lang="en">
-      <Head />
       <AuthProvider>
         <body
-          className={
-            "w-full max-w-[1000px] mx-auto text-sm sm:text-base min-h-screen flex flex-col text-slate-800  " +
-            fugaz.className
-          }
+          className={`${openSans.variable}  antialiased w-full max-w-[1300px] mx-auto text-sm sm:text-base min-h-screen flex flex-col text-slate-800`}
         >
           {header}
           {children}
