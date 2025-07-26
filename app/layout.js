@@ -3,7 +3,7 @@ import "./globals.css";
 import Link from "next/link";
 import { AuthProvider } from "@/context/AuthContext";
 import Logout from "@/components/Logout";
-import Head from "./head";
+import Head from "./head.js";
 
 const openSans = Open_Sans({
   variable: "--font-geist-sans",
