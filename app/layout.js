@@ -1,8 +1,8 @@
 import { Chicle, Geist_Mono, Open_Sans } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
 import { AuthProvider } from "@/context/AuthContext";
-import Logout from "@/components/Logout";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const openSans = Open_Sans({
   variable: "--font-geist-sans",
@@ -25,32 +25,15 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const header = (
-    <header className="p-4 sm:p-8 flex items-center justify-between gap-4">
-      <Link href={"/"}>
-        <h1 className={`${fugaz.className} text-2xl sm:text-4xl textGradient`}>
-          Moodly
-        </h1>
-      </Link>
-      <Logout />
-    </header>
-  );
-  const footer = (
-    <footer className="p-4 sm:p-8 grid place-items-center">
-      <p className={`${fugaz.className} text-indigo-500 sm:text-2xl`}>
-        Created with ❤️
-      </p>
-    </footer>
-  );
   return (
     <html lang="en">
       <AuthProvider>
         <body
-          className={`${openSans.variable}  antialiased w-full max-w-[1300px] mx-auto text-sm sm:text-base min-h-screen flex flex-col text-slate-800`}
+          className={`${openSans.variable} antialiased w-full max-w-[1300px] mx-auto text-sm sm:text-base min-h-screen flex flex-col text-slate-800`}
         >
-          {header}
+          <Header />
           {children}
-          {footer}
+          <Footer />
         </body>
       </AuthProvider>
     </html>

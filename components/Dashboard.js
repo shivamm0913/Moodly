@@ -1,6 +1,7 @@
 "use client";
 import { Chicle } from "next/font/google";
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import Calendar from "./Calendar";
 import { useAuth } from "@/context/AuthContext";
 import { doc, setDoc } from "firebase/firestore";
@@ -60,7 +61,7 @@ export default function Dashboard() {
       setUserDataObj(newData);
       //update firebase
       const docRef = doc(db, "users", currentUser.uid);
-      const res = await setDoc(
+      await setDoc(
         docRef,
         {
           [year]: {
@@ -99,55 +100,77 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex flex-1 flex-col gap-8 sm:gap-10 md:gap-16 ">
-      <div className="grid  grid-cols-3 bg-indigo-50 text-indigo-500 rounded-lg p-4 gap-4 ">
+    <motion.div
+      className="flex flex-1 flex-col gap-8 sm:gap-10 md:gap-16"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div
+        className="grid  grid-cols-3 bg-indigo-50 text-indigo-500 rounded-lg p-4 gap-4 "
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4, delay: 0.1 }}
+      >
         {Object.keys(statuses).map((status, statusIndex) => {
           return (
-            <div key={statusIndex} className=" flex flex-col gap-1 sm:gap-2">
-              <p className="font-medium capitalize text-xs sm:text-sm   truncate">
+            <motion.div
+              key={statusIndex}
+              className=" flex flex-col gap-1 sm:gap-2"
+              whileHover={{ scale: 1.05 }}
+            >
+              <p className="font-medium capitalize text-xs sm:text-sm truncate">
                 {status.replaceAll("_", " ")}
               </p>
               <p className={`${fugaz.className} text-base sm:text-lg truncate`}>
                 {statuses[status]}
                 {status === "nums_day" ? "🔥" : ""}
               </p>
-            </div>
+            </motion.div>
           );
         })}
-      </div>
+      </motion.div>
 
       <h4 className={`${fugaz.className} text-6xl sm:text-7xl md:text-8xl`}>
         How do you <span className="textGradient">feel </span>today?
       </h4>
-      <div className="flex items-stretch flex-wrap gap-4">
+
+      <motion.div
+        className="flex items-stretch flex-wrap gap-4"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
         {Object.keys(moods).map((mood, moodIndex) => {
           return (
-            <button
+            <motion.button
               onClick={() => {
                 const currMoodValue = moodIndex + 1;
                 handleSetMood(currMoodValue);
               }}
-              className={`flex-1 flex flex-col gap-2 items-center p-4 px-5 rounded-2xl purpleShadow duration-200 bg-indigo-50 hover:bg-indigo-100 text-center `}
+              className="flex-1 flex flex-col gap-2 items-center p-4 px-5 rounded-2xl purpleShadow duration-200 bg-indigo-50 hover:bg-indigo-100 text-center"
               key={moodIndex}
+              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
             >
               <p className="text-4xl sm:text-5xl md:text-6xl pb-6">
                 {moods[mood]}
               </p>
               <p
-                className={`${fugaz.className} text-indigo-500 text-xl sm:text-lg md:text-2xl   `}
+                className={`${fugaz.className} text-indigo-500 text-xl sm:text-lg md:text-2xl`}
               >
                 {mood}
               </p>
-            </button>
+            </motion.button>
           );
         })}
-      </div>
+      </motion.div>
 
       <Calendar
         completeData={data}
         handleSetMood={handleSetMood}
         moods={moods}
       />
-    </div>
+    </motion.div>
   );
 }

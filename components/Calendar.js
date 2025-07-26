@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { gradients, baseRating } from "@/utils";
 import { Chicle } from "next/font/google";
-import { FaChevronCircleLeft } from "react-icons/fa";
-import { FaChevronCircleRight } from "react-icons/fa";
+import { FaChevronCircleLeft, FaChevronCircleRight } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const months = {
   January: "Jan",
@@ -44,7 +44,6 @@ export default function Calendar(props) {
     return moods[moodKeys[moodValue - 1]] || "";
   }
 
-  const now = new Date();
   const currMonth = now.getMonth();
   const [selectedMonth, setSelectedMonth] = useState(
     Object.keys(months)[currMonth]
@@ -55,14 +54,10 @@ export default function Calendar(props) {
   const data = completeData?.[selectedYear]?.[numericMonth] || {};
 
   function handleIncrementMonth(val) {
-    //1+ ,1-
-    //if we hit the bounds of the month , then we can  just adjust the year that is displayed instead
     if (numericMonth + val < 0) {
-      // set the month value -11 and decrement the year
       setSelectedYear((curr) => curr - 1);
       setSelectedMonth(monthsArr[monthsArr.length - 1]);
     } else if (numericMonth + val > 11) {
-      //set the month val = 0 and incremenet the year
       setSelectedYear((curr) => curr + 1);
       setSelectedMonth(monthsArr[0]);
     } else {
@@ -70,8 +65,6 @@ export default function Calendar(props) {
     }
   }
 
-  // const year = 2024
-  // const month = "July"
   const monthNow = new Date(
     selectedYear,
     Object.keys(months).indexOf(selectedMonth),
@@ -86,32 +79,38 @@ export default function Calendar(props) {
 
   const daysToDisplay = firstDayOfMonth + daysInMonth;
   const numsRows = Math.floor(daysToDisplay / 7) + (daysToDisplay % 7 ? 1 : 0);
+
   return (
-    <div className=" flex  flex-col gap-2">
+    <motion.div
+      className="flex flex-col gap-2"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+    >
       <div className="grid grid-cols-3 gap-4">
-        <button
-          onClick={() => {
-            handleIncrementMonth(-1);
-          }}
+        <motion.button
+          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.1 }}
+          onClick={() => handleIncrementMonth(-1)}
           className="mr-auto text-indigo-400 text-lg duration-200 hover:opacity-60 sm:text-xl"
         >
           <FaChevronCircleLeft />
-        </button>
+        </motion.button>
         <p
-          className={`text-center capitalize text-xl sm:text-4xl  textGradient whitespace-nowrap  ${fugaz.className}`}
+          className={`text-center capitalize text-xl sm:text-4xl textGradient whitespace-nowrap ${fugaz.className}`}
         >
-          {selectedMonth},{selectedYear}
+          {selectedMonth}, {selectedYear}
         </p>
-        <button
-          onClick={() => {
-            handleIncrementMonth(+1);
-          }}
-          className="ml-auto text-indigo-400 text-lg duration-200 hover:opacity-60  sm:text-xl"
+        <motion.button
+          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.1 }}
+          onClick={() => handleIncrementMonth(+1)}
+          className="ml-auto text-indigo-400 text-lg duration-200 hover:opacity-60 sm:text-xl"
         >
           <FaChevronCircleRight />
-        </button>
+        </motion.button>
       </div>
-      <div className="flex flex-col overflow-hidden gap-1 py-4 sm:py-6  md:py-10">
+      <div className="flex flex-col overflow-hidden gap-1 py-4 sm:py-6 md:py-10">
         {[...Array(numsRows).keys()].map((row, rowIndex) => {
           return (
             <div key={rowIndex} className="grid grid-cols-7 gap-1">
@@ -139,24 +138,27 @@ export default function Calendar(props) {
                   : "white";
 
                 return (
-                  <div
+                  <motion.div
+                    key={dayOfWeekIndex}
                     style={{ background: color }}
-                    className={`text-xs sm:text-sm border border-solid p-2 flex items-center gap-2 justify-between rounded-lg  ${
+                    className={`text-xs sm:text-sm border border-solid p-2 flex items-center gap-2 justify-between rounded-lg ${
                       isToday ? "border-indigo-400" : "border-indigo-100"
                     } ${color === "white" ? "text-indigo-400" : "text-white"}`}
-                    key={dayOfWeekIndex}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: dayIndex * 0.02 }}
                   >
                     <p>{dayIndex}</p>
                     {data[dayIndex] && (
                       <p className="">{getEmoji(data[dayIndex])}</p>
                     )}
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 }
