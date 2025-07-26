@@ -49,7 +49,7 @@ export default function Login() {
       <h3 className={`${fugaz.className} text-4xl sm:text-5xl md:text-6xl`}>
         {isRegister ? "Register" : "Login"}
       </h3>
-      <p>You're one step away!</p>
+      <p>You&apos;re one step away!</p>
       <input
         type="email"
         value={email}
