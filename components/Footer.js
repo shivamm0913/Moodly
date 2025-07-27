@@ -16,7 +16,7 @@ export default function Footer() {
       transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
     >
       <p className={`${fugaz.className} text-indigo-500 sm:text-2xl`}>
-        Created with ❤️ by Shivam Kewat
+        Created with ❤️ by Shivam
       </p>
     </motion.footer>
   );
