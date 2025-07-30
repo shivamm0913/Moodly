@@ -33,7 +33,7 @@ export default function Dashboard() {
     }
     return {
       nums_day: total_num_of_days,
-      average_mood: sum_mood / total_num_of_days,
+      average_mood: parseFloat((sum_mood / total_num_of_days).toFixed(2)),
     };
   }
 
